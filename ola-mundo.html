@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olá mundo, mas...?</title>
+    <style> 
+        body{
+            background-color: rgb(248, 207, 157);
+        }
+        h1{
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+        p.corpo{
+            color: black;
+            position: relative;
+            font-size: 30px;
+            font-weight: bolder;
+            transition: 1s;
+            user-select: none;
+        }
+        .corpo:hover{
+            transform:scale(1.03);
+            color:rgb(73, 69, 69);
+        }
+        p{
+            user-select: none;
+            text-shadow: black 0em 0em 0.3em;
+            line-height: 45px;
+        }
+        .botao{
+            filter: opacity(0%);
+            color: white;
+            font-size: 25px;
+            text-align: center;
+            position: relative;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            border-radius: 3px;
+            width: 150px;
+            height: 50px;
+            bottom: -70px;
+            background-color: rgb(19, 189, 61);
+            box-shadow: black 0 0 0.2em 0em;
+            transition: 0.3s;
+        }
+        .botao:hover{
+            background-color: rgb(17, 167, 17);
+            color: rgb(221, 212, 212);
+        }
+        .botao:active{
+            box-shadow: black 0 0 0.1em 0em inset, black 0 0 0.2em 0em;;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1> <!--Sim, eu to usando o h1 como div-->
+        <p class="corpo"></p>
+        <a href="https://www.youtube.com/watch?v=QtBDL8EiNZo">
+        <div class="botao" > <p>Veja mais! </p> </div></a>
+    </h1>
+    <script>
+        var container= window.document.getElementsByClassName('corpo')[0];
+        container.innerText=`Olá, mundo!`;
+        var text='';
+        var produto;
+        const cores = new Array("rgb(220, 245, 81)","rgb(255, 153, 0)","rgb(204, 0, 255)","rgb(255, 0, 0)","rgb(13, 228, 217)","rgb(10, 184, 68)","rgb(255, 0, 140)","rgb(255, 255, 255)","rgb(0, 255, 13)","rgb(255, 251, 0)","rgb(0, 129, 101)","rgb(82, 45, 11)","rgb(119, 136, 153)","rgb(255, 160, 122)","rgb(240, 230, 140)","rgb(0, 47, 255)", "rgb(141, 57, 42)"); // array com as 17 possíveis cores de sombra
+
+        // 24*9 = 225
+        
+        var r=0,x=-4,y=-12,b=0.2;
+        for(i=0;i<225;i++){
+            text+=`${cores[r]} `;
+            r+1!=17?r++:r=0;
+            produto= x*5.5;
+            text+=`${produto}em `;
+            produto=y*1;
+            text+=`${produto}em `;
+            x+1!=5?x++:x=-4,y+1!=13?y++:y=-12;
+            text+=`${b}em`;
+            i+1!=225?text+=`, `:text+=``;
+        } // gera um texto com 225 combinações de coordenadas e cores (cor, x, y, blur)
+        container.style.textShadow=`${text}`; // aplica essas combinações como estilização, gerando sombras
+
+        let id = null;
+        const botao= window.document.getElementsByClassName('botao')[0];
+        let pos=0;
+        clearInterval(id);
+        id=setInterval(buttonvisibility, 5);
+        function buttonvisibility(){ //botão muito legal que ativa quando passa o mouse no olá mundo
+            if(pos==200){
+                clearInterval(id);
+            }
+            else {
+                pos+=0.5;
+                botao.style.filter=`opacity(${pos}%)`;
+            }
+        }
+    </script>
+</body>
+</html>
